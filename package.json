@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e:watch": "watch 'ng e2e --dev-server-target= --webdriver-update=false' e2e --wait=1",
+    "e2e:watch": "watch 'ng e2e --dev-server-target= --webdriver-update=false' src e2e --wait=1",
     "postinstall": "./node_modules/protractor/bin/webdriver-manager update"
   },
   "private": true,

@@ -13,6 +13,6 @@ export class SearchFormPage {
     };
 
     get firstCharacterNameText() {
-        return element(by.css('app-character h6')).getAttribute('innerText');
+        return element(by.css('[data-testid=character-name]')).getAttribute('innerText');
     };
 };
