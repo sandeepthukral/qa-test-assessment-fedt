@@ -1,22 +1,26 @@
-const { Given, When, Then } = require('cucumber');
+import { Given, When, Then, TableDefinition } from 'cucumber';
 const { browser } = require('protractor');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
-const searchFormPO = require('../page-objects/search-form.po');
+import {SearchFormPage} from '../page-objects/search-form.po';
+const searchFormPO = new SearchFormPage();
 
 Given('I navigate to {string}', { timeout: 60 * 1000 }, async (string) => {
     await browser.get('http://' + string + ':4200/');
-    await browser.sleep(2000);
+    await chai.expect(searchFormPO.searchBtn.isDisplayed()).to.eventually.equal(true);
 });
 
-When('I search for Luke Skywalkers name', { timeout: 60 * 1000 }, async () => {
-    await searchFormPO.input.sendKeys('Luke Skywalker');
+When(/I search for ([^"]*)/, { timeout: 60 * 1000 }, async (variable: string, data) => {
+    await searchFormPO.input.sendKeys(data.rawTable[0][1]);
     await searchFormPO.searchBtn.click();
     await browser.sleep(2000);
 });
 
-Then('I see Lukes details', { timeout: 60 * 1000 }, async () => {
-    await chai.expect(searchFormPO.firstCharacterName.getAttribute('innerText'))
-        .to.eventually.contain('Skywalker');
+Then('I see the person details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
+    const rows = table.hashes();
+    rows.map(async (row) => {
+        await chai.expect(searchFormPO.firstCharacterNameText)
+        .to.eventually.contain(row.name);
+    })
 });
