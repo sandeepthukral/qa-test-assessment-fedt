@@ -19,8 +19,7 @@ When(/I search for ([^"]*)/, { timeout: 60 * 1000 }, async (variable: string, da
 
 Then('I see the person details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
     const rows = table.hashes();
-    rows.map(async (row) => {
-        await chai.expect(searchFormPO.firstCharacterNameText)
-        .to.eventually.contain(row.name);
+    rows.map(async ({name, gender, birthYear, eyeColor, skinColor}) => {
+        await searchFormPO.verifyDetailsForFirstCharacter(name, gender, birthYear, eyeColor, skinColor);
     })
 });
