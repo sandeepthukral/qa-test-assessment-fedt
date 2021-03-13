@@ -14,31 +14,39 @@ export class SearchFormPage {
         return element(by.css('button'));
     };
 
-    get firstCharacterName() {
-        return element(by.css('[data-testid=character-name]'));
+    get elementCardResults() {
+        return element.all(by.css('[data-testid=character-card]'))
+    }
+
+    nthCharacterResult(index) {
+        return this.elementCardResults.get(index);
+    }
+
+    nthCharacterName(index) {
+        return this.nthCharacterResult(index).element(by.css('[data-testid=character-name]'));
     };
     
-    get firstCharacterGender() {
-        return element(by.css('[data-testid=gender-value]'));
+    nthCharacterGender(index) {
+        return this.nthCharacterResult(index).element(by.css('[data-testid=gender-value]'));
     };
     
-    get firstCharacterBirthYear() {
-        return element(by.css('[data-testid=birth-year-value]'));
+    nthCharacterBirthYear(index) {
+        return this.nthCharacterResult(index).element(by.css('[data-testid=birth-year-value]'));
     };
 
-    get firstCharacterEyeColor() {
-        return element(by.css('[data-testid=eye-color-value]'));
+    nthCharacterEyeColor(index) {
+        return this.nthCharacterResult(index).element(by.css('[data-testid=eye-color-value]'));
     };
 
-    get firstCharacterSkinColor() {
-        return element(by.css('[data-testid=skin-color-value]'));
+    nthCharacterSkinColor(index) {
+        return this.nthCharacterResult(index).element(by.css('[data-testid=skin-color-value]'));
     };
 
-    async verifyDetailsForFirstCharacter(name, gender, birthYear, eyeColor, skinColor) {
-        await expect(this.firstCharacterName.getAttribute('innerText')).to.eventually.equal(name);
-        await expect(this.firstCharacterGender.getAttribute('innerText')).to.eventually.equal(gender);
-        await expect(this.firstCharacterEyeColor.getAttribute('innerText')).to.eventually.equal(birthYear);
-        await expect(this.firstCharacterEyeColor.getAttribute('innerText')).to.eventually.equal(eyeColor);
-        await expect(this.firstCharacterSkinColor.getAttribute('innerText')).to.eventually.equal(skinColor);
+    async verifyDetailsForNthCharacter(index, name, gender, birthYear, eyeColor, skinColor) {
+        await expect(this.nthCharacterName(index).getAttribute('innerText')).to.eventually.equal(name);
+        await expect(this.nthCharacterGender(index).getAttribute('innerText')).to.eventually.equal(gender);
+        await expect(this.nthCharacterBirthYear(index).getAttribute('innerText')).to.eventually.equal(birthYear);
+        await expect(this.nthCharacterEyeColor(index).getAttribute('innerText')).to.eventually.equal(eyeColor);
+        await expect(this.nthCharacterSkinColor(index).getAttribute('innerText')).to.eventually.equal(skinColor);
     }
 };
