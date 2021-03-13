@@ -18,12 +18,29 @@ When('I search for text', { timeout: 60 * 1000 }, async (data: TableDefinition) 
     await searchFormPO.searchBtn.click();
 });
 
+When('I search for planet with text', async(data: TableDefinition) => {
+    searchFormPO.radioButtonPlanet.click();
+    const rows = data.hashes();
+    await searchFormPO.input.sendKeys(rows[0].text);
+    await searchFormPO.searchBtn.click();
+})
+
 Then('I should see the person details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
-    await expect(searchFormPO.elementCardResults.get(0).isDisplayed()).to.eventually.equal(true);
+    await expect(searchFormPO.detailsCards.get(0).isDisplayed()).to.eventually.equal(true);
     const rows = table.hashes();
     let index = 0
     for (let { name, gender, birthYear, eyeColor, skinColor} of rows) {
         await(searchFormPO.verifyDetailsForNthCharacter(index, name, gender, birthYear, eyeColor, skinColor))    
+        index = index + 1
+    }
+});
+
+Then('I should see the planet details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
+    await expect(searchFormPO.detailsCards.get(0).isDisplayed()).to.eventually.equal(true);
+    const rows = table.hashes();
+    let index = 0
+    for (let { name, population, climate, gravity} of rows) {
+        await(searchFormPO.verifyDetailsForNthPlanet(index, name, population, climate, gravity))    
         index = index + 1
     }
 });

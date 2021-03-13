@@ -14,12 +14,36 @@ export class SearchFormPage {
         return element(by.css('button'));
     };
 
-    get elementCardResults() {
-        return element.all(by.css('[data-testid=character-card]'))
+    get radioButtonPlanet() {
+        return element(by.css('[for=planets]'));
+    }
+
+    get detailsCards() {
+        return element.all(by.css('[data-testid*=details-card-]'))
     }
 
     nthCharacterResult(index) {
-        return this.elementCardResults.get(index);
+        return this.detailsCards.get(index);
+    }
+
+    nthDetailsCard(index) {
+        return this.detailsCards.get(index);
+    }
+    
+    nthPlanetName(index) {
+        return this.nthDetailsCard(index).element(by.css('[data-testId=planet-name]'))
+    }
+
+    nthPlanetPopulation(index) {
+        return this.nthDetailsCard(index).element(by.css('[data-testid=population-value]'))
+    }
+
+    nthPlanetClimate(index) {
+        return this.nthDetailsCard(index).element(by.css('[data-testid=climate-value]'))
+    }
+
+    nthPlanetGravity(index) {
+        return this.nthDetailsCard(index).element(by.css('[data-testId=gravity-value]'))
     }
 
     nthCharacterName(index) {
@@ -48,5 +72,12 @@ export class SearchFormPage {
         await expect(this.nthCharacterBirthYear(index).getAttribute('innerText')).to.eventually.equal(birthYear);
         await expect(this.nthCharacterEyeColor(index).getAttribute('innerText')).to.eventually.equal(eyeColor);
         await expect(this.nthCharacterSkinColor(index).getAttribute('innerText')).to.eventually.equal(skinColor);
+    }
+
+    async verifyDetailsForNthPlanet(index, name, population, climate, gravity) {
+        await expect(this.nthPlanetName(index).getAttribute('innerText')).to.eventually.equal(name);
+        await expect(this.nthPlanetPopulation(index).getAttribute('innerText')).to.eventually.equal(population);
+        await expect(this.nthPlanetClimate(index).getAttribute('innerText')).to.eventually.equal(climate);
+        await expect(this.nthPlanetGravity(index).getAttribute('innerText')).to.eventually.equal(gravity);
     }
 };
