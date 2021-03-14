@@ -30,7 +30,7 @@ When('I search for planet with text', async(data: TableDefinition) => {
     const rows = data.hashes();
     await searchFormPO.input.sendKeys(rows[0].text);
     await searchFormPO.searchButton.click();
-})
+});
 
 Then('I should see the search component rendered correctly', async() => {
     await expect(searchFormPO.searchCard.isDisplayed()).to.eventually.equal(true);
@@ -42,20 +42,20 @@ Then('I should see the search component rendered correctly', async() => {
 Then('I should see the person details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
     await expect(searchFormPO.detailsCards.get(0).isDisplayed()).to.eventually.equal(true);
     const rows = table.hashes();
-    let index = 0
-    for (let { name, gender, birthYear, eyeColor, skinColor} of rows) {
-        await(searchFormPO.verifyDetailsForNthCharacter(index, name, gender, birthYear, eyeColor, skinColor))    
-        index = index + 1
+    let index = 0;
+    for (const { name, gender, birthYear, eyeColor, skinColor} of rows) {
+        await(searchFormPO.verifyDetailsForNthCharacter(index, name, gender, birthYear, eyeColor, skinColor));
+        index = index + 1;
     }
 });
 
 Then('I should see the planet details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
     await expect(searchFormPO.detailsCards.get(0).isDisplayed()).to.eventually.equal(true);
     const rows = table.hashes();
-    let index = 0
-    for (let { name, population, climate, gravity} of rows) {
-        await(searchFormPO.verifyDetailsForNthPlanet(index, name, population, climate, gravity))    
-        index = index + 1
+    let index = 0;
+    for (const { name, population, climate, gravity} of rows) {
+        await(searchFormPO.verifyDetailsForNthPlanet(index, name, population, climate, gravity));
+        index = index + 1;
     }
 });
 
