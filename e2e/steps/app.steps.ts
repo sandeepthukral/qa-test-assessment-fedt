@@ -10,13 +10,13 @@ const searchFormPO = new SearchFormPage();
 
 Given('I navigate to {string}', { timeout: 60 * 1000 }, async (string) => {
     await browser.get('http://' + string + ':4200/');
-    await chai.expect(searchFormPO.searchBtn.isDisplayed()).to.eventually.equal(true);
+    await chai.expect(searchFormPO.searchButton.isDisplayed()).to.eventually.equal(true);
 });
 
 When('I search for text', { timeout: 60 * 1000 }, async (data: TableDefinition) => {
     const rows = data.hashes();
     await searchFormPO.input.sendKeys(rows[0].text);
-    await searchFormPO.searchBtn.click();
+    await searchFormPO.searchButton.click();
 });
 
 When('I search for text and press enter', { timeout: 60 * 1000 }, async (data: TableDefinition) => {
@@ -26,11 +26,18 @@ When('I search for text and press enter', { timeout: 60 * 1000 }, async (data: T
 });
 
 When('I search for planet with text', async(data: TableDefinition) => {
-    searchFormPO.radioButtonPlanet.click();
+    searchFormPO.radioButtonPlanetLabel.click();
     const rows = data.hashes();
     await searchFormPO.input.sendKeys(rows[0].text);
-    await searchFormPO.searchBtn.click();
+    await searchFormPO.searchButton.click();
 })
+
+Then('I should see the search component rendered correctly', async() => {
+    await expect(searchFormPO.searchCard.isDisplayed()).to.eventually.equal(true);
+    await expect(searchFormPO.radioButtonPeople.isSelected()).to.eventually.equal(true);
+    await expect(searchFormPO.searchButton.isDisplayed()).to.eventually.equal(true);
+    await expect(searchFormPO.searchButton.isEnabled()).to.eventually.equal(true);
+});
 
 Then('I should see the person details', { timeout: 60 * 1000 }, async (table: TableDefinition) => {
     await expect(searchFormPO.detailsCards.get(0).isDisplayed()).to.eventually.equal(true);

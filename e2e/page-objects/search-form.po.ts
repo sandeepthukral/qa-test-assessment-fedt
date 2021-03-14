@@ -6,11 +6,15 @@ export class SearchFormPage {
 
     constructor() {}
 
+    get searchCard() {
+        return element(by.css('[data-testid=search-card]'));
+    }
+
     get input() {
         return element(by.id('query'));
     };
 
-    get searchBtn() {
+    get searchButton() {
         return element(by.css('[data-testid=search-button]'));
     };
 
@@ -18,7 +22,11 @@ export class SearchFormPage {
         return element(by.css('[data-testid=no-result]'))
     }
 
-    get radioButtonPlanet() {
+    get radioButtonPeople() {
+        return element(by.id('people'));
+    }
+
+    get radioButtonPlanetLabel() {
         return element(by.css('[for=planets]'));
     }
 
