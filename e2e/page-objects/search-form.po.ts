@@ -11,8 +11,12 @@ export class SearchFormPage {
     };
 
     get searchBtn() {
-        return element(by.css('button'));
+        return element(by.css('[data-testid=search-button]'));
     };
+
+    get noSearchResults() {
+        return element(by.css('[data-testid=no-result]'))
+    }
 
     get radioButtonPlanet() {
         return element(by.css('[for=planets]'));

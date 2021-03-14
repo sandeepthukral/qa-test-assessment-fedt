@@ -8,9 +8,9 @@
       <app-search-form></app-search-form>
       <br>
 
-      <div *ngIf="isLoading">Loading...</div>
+      <div *ngIf="isLoading" data-testid="loading">Loading...</div>
 
-      <div *ngIf="isNotFound(searchResult, isLoading)">Not found.</div>
+      <div *ngIf="isNotFound(searchResult, isLoading)" data-testid="no-result">Not found.</div>
 
       <div *ngIf="!isLoading">
         <div *ngIf="searchType === 'people'">

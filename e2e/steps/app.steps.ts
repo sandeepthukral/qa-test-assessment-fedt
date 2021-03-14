@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { Given, When, Then, TableDefinition } from 'cucumber';
-const { browser } = require('protractor');
+import { browser } from 'protractor';
+import { protractor } from 'protractor/built/ptor';
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
@@ -16,6 +17,12 @@ When('I search for text', { timeout: 60 * 1000 }, async (data: TableDefinition) 
     const rows = data.hashes();
     await searchFormPO.input.sendKeys(rows[0].text);
     await searchFormPO.searchBtn.click();
+});
+
+When('I search for text and press enter', { timeout: 60 * 1000 }, async (data: TableDefinition) => {
+    const rows = data.hashes();
+    await searchFormPO.input.sendKeys(rows[0].text);
+    await searchFormPO.input.sendKeys(protractor.Key.ENTER);
 });
 
 When('I search for planet with text', async(data: TableDefinition) => {
@@ -43,4 +50,8 @@ Then('I should see the planet details', { timeout: 60 * 1000 }, async (table: Ta
         await(searchFormPO.verifyDetailsForNthPlanet(index, name, population, climate, gravity))    
         index = index + 1
     }
+});
+
+Then('I should see no results found', async () => {
+    await expect(searchFormPO.noSearchResults.isDisplayed()).to.eventually.equal(true);
 });
