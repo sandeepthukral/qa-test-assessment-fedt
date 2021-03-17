@@ -8,8 +8,8 @@ chai.use(require('chai-as-promised'));
 import {SearchFormPage} from '../page-objects/search-form.po';
 const searchFormPO = new SearchFormPage();
 
-Given('I navigate to {string}', { timeout: 60 * 1000 }, async (string) => {
-    await browser.get('http://' + string + ':4200/');
+Given('I visit the application search page', { timeout: 60 * 1000 }, async () => {
+    await browser.get(browser.baseUrl);
     await chai.expect(searchFormPO.searchButton.isDisplayed()).to.eventually.equal(true);
 });
 

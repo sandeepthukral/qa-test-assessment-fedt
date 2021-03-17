@@ -1,7 +1,7 @@
 Feature: Search for a Star Wars character
     
     Scenario: Search a person by full name with one record
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for text
         | text |
         | Luke Skywalker|
@@ -11,7 +11,7 @@ Feature: Search for a Star Wars character
 
 
     Scenario: Search a person by full name with two records
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for text
         | text  |
         | Darth |
@@ -21,14 +21,14 @@ Feature: Search for a Star Wars character
         | Darth Maul   | male   | 54BBY     | yellow   | red       |
 
     Scenario: Search a person with no results
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for text
         | text |
         | blah |
         Then I should see no results found
 
     Scenario: Search a person by pressing enter on search field
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for text and press enter
         | text |
         | Luke |

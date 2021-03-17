@@ -1,7 +1,7 @@
 Feature: Search for a Star Wars planet
     
     Scenario: Search a person by full name with one record
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for planet with text
         | text |
         | Hoth |
@@ -11,7 +11,7 @@ Feature: Search for a Star Wars planet
 
 
     Scenario: Search a planet by partial name with two records
-        Given I navigate to "localhost"
+        Given I visit the application search page
         When I search for planet with text
         | text |
         | ut |
