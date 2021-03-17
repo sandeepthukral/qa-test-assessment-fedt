@@ -21,7 +21,7 @@ describe('API Service Tests', () => {
         apiService = TestBed.get(ApiService);
         httpTestingController = TestBed.get(HttpTestingController);
     });
-    it('should call the correct endpoint with correct data', (done) => {
+    it('should call the backend with correct data and return the response', (done) => {
         const searchType = 'people';
         const query = 'Luke';
         const expectedResponse = {

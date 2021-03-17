@@ -12,7 +12,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "types": ["@types/chai", "@types/mocha", "@types/protractor", "@types/chai-as-promised"],
+    "types": ["chai", "mocha", "protractor", "chai-as-promised"],
     "lib": [
       "es2018",
       "dom"

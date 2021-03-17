@@ -12,7 +12,7 @@ exports.config = {
     require: [
       './e2e/**/*.steps.ts'
     ],
-    format: "progress"
+    plugin: ['progress', 'json:test-reports/cucumber-test-results.json']
   },
   debug: false,
   directConnect: true,
