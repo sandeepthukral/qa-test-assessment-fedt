@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+app-search-form .card {
+    border-color: rgb(137, 144, 203);
+    border-style: inset;
+    border-width: 0.3rem;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+h6 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
